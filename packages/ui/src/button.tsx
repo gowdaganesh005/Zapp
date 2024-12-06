@@ -3,18 +3,32 @@
 import { ReactNode } from "react";
 
 interface ButtonProps {
-  children: ReactNode;
+  children:   ReactNode;
   className?: string;
-  appName: string;
+  onClick:    ()=>void;
+  type:       any
+  
+  
 }
 
-export const Button = ({ children, className, appName }: ButtonProps) => {
-  return (
-    <button
-      className={className}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
-    >
-      {children}
-    </button>
+export const ButtonType = {
+  transparent: "border border-transparent hover:bg-primary-400 hover:border-primary-500",
+  fill: "bg-gradient-to-l from-primary-600 via-primary-700 to-primary-900 text-white font-medium [background-size:200%] animate-moving-gradient hover:border-primary",
+};
+
+
+
+
+
+
+export const Button = ({ children, className,onClick,type }: ButtonProps) => {
+  return ( 
+    <div className={`px-1  flex justify-center ${className}`}>
+      <button className={`${className} ${type}   p-1  rounded-md border-collapse`}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    </div>
   );
 };

@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  userid      String                    @id @default(uuid())
+  name        String  
+  email       String                    @unique
+  phoneNumber Int                       @unique
+  password    String  
+  isVerified  Boolean 
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+  walletId    Wallet? 
+  transactions Transactions[]           @relation("UserTransactions")
+  recievingTransactions Transactions[]  @relation("RecieverTransactions")
+}
+
+model Transactions{
+  transactionsId  String          @id @default(uuid())
+  sender          User            @relation("UserTransactions",fields: [senderId],references: [userid])
+  senderId        String  
+  reciever        User?           @relation("RecieverTransactions",fields: [recieverId],references: [userid])
+  recieverId      String
+  status          Status
+  type            TransactionType
+  timestamp       DateTime        @default(now())
+
+}
+
+model Wallet{
+  walletId    String    @unique @default(uuid())
+  owner       User      @relation(fields: [ownerId],references: [userid])
+  ownerId     String    @unique
+  balance     Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum Status{
+  SUCCESS
+  PENDING
+  FAILED
+}
+
+enum TransactionType{
+  P2P
+  P2B
+  WITHDRAWL
+  DEPOSIT
+}

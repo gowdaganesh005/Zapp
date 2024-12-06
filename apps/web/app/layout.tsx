@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Appbar from "@repo/ui/Appbar";
+import Bg from "@repo/ui/Bg";
+import { SignIn,SignOut,SignUp } from "./components/Signin";
+import Providers from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Providers>
+        <Bg>
+        <Appbar title="Zapp" buttons={{SignIn,SignOut,SignUp}}  isAuth={false}/>
         {children}
+        </Bg>
+        </Providers>
+        
       </body>
     </html>
   );
