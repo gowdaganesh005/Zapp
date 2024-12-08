@@ -28,9 +28,7 @@ export default function Signin(){
         <>
         
         <div className="flex justify-center items-center h-screen">
-        <CardWrapper className="w-[80%]  max-w-screen-md" >
-            
-            
+            <CardWrapper className="w-[80%]  max-w-screen-md" >
             <Card className="bg-gradient-to-b from-primary-900 to-primary-950  h-fit ">
                 <div className="text-xl font-bold text-primary-300 text-center">
                     Sign In To Your Account
@@ -38,19 +36,16 @@ export default function Signin(){
                 <LabelledInput onChange={(e:any)=>setPhoneNumber(e.target.value)} label="Phone Number" type="number" />
                 <LabelledInput onChange={(e:any)=>setPassword(e.target.value)} label="Password" type="password" />
                 <div className="flex justify-center items-center my-4">
-                <Button 
-                className="text-xl w-[96%] h-14 "
-                type={ButtonType.fill} 
-                onClick={handleClick}>
-                    Signin
-                </Button>
+                    <Button 
+                    className="text-xl w-[96%] h-14 "
+                    type={ButtonType.fill} 
+                    onClick={handleClick}>
+                        Signin
+                    </Button>
                 </div>
             </Card>
-            </CardWrapper>
-            
-            </div>
-                
-            
+            </CardWrapper>    
+        </div>
         </>
     )
 }

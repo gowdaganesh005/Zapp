@@ -5,6 +5,9 @@ import Appbar from "@repo/ui/Appbar";
 import Bg from "@repo/ui/Bg";
 import { SignIn,SignOut,SignUp } from "./components/Signin";
 import Providers from "./providers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +34,10 @@ export default function RootLayout({
         <Providers>
         <Bg>
         <Appbar title="Zapp" buttons={{SignIn,SignOut,SignUp}}  isAuth={false}/>
+        
         {children}
+        <ToastContainer theme="dark"/>
+      
         </Bg>
         </Providers>
         

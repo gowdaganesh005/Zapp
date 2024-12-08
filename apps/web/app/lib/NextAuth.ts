@@ -1,8 +1,6 @@
-
 import CredentialsProvider from "next-auth/providers/credentials"
 
-
-export  const  NEXT_AUTH={
+export const NEXT_AUTH={
    
         providers:[
             CredentialsProvider({
@@ -16,6 +14,11 @@ export  const  NEXT_AUTH={
                     }
                 },
                 async authorize(credentials:any){
+                    try{
+                        
+                    }catch(error){
+
+                    }
                     return {
                         id: "user1",
                         name:"akjkfjadk",

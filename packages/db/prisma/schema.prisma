@@ -17,9 +17,9 @@ model User{
   userid      String                    @id @default(uuid())
   name        String  
   email       String                    @unique
-  phoneNumber Int                       @unique
+  phoneNumber String                    @unique
   password    String  
-  isVerified  Boolean 
+  isVerified  Boolean                   @default(false)
   createdAt   DateTime                  @default(now())
   updatedAt   DateTime                  @updatedAt
   walletId    Wallet? 
@@ -29,6 +29,7 @@ model User{
 
 model Transactions{
   transactionsId  String          @id @default(uuid())
+  token           String
   sender          User            @relation("UserTransactions",fields: [senderId],references: [userid])
   senderId        String  
   reciever        User?           @relation("RecieverTransactions",fields: [recieverId],references: [userid])
