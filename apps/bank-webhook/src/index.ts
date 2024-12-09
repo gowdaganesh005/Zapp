@@ -10,9 +10,31 @@ app.post("/bankWebhook",async(req:any,res:any)=>{
         userId: req.body.userId,
         amount: req.body.amount
     }
-    await db.transactions.update({
-        where:{
-            token:paymentInformation.token
-        }
-    })
+    
+    try {
+        db.$transaction([
+        await db.wallet.update({
+            where:{
+                userId:paymentInformation.userId
+            },
+            data:{
+                amount:{
+                    increment:paymentInformation.amount
+                }
+            }
+        }),
+        await db.transactions.update({
+            where:{
+                token:paymentInformation.token
+            },
+            data:{
+                status:"Success"
+            }
+        })
+        ])
+        res.status(200).json({message:"Captured"})
+    } catch (error) {
+        res.status(500).json({message:"failed"})
+        
+    }
 })
