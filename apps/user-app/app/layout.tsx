@@ -3,8 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Appbar from "@repo/ui/Appbar";
 import Bg from "@repo/ui/Bg";
-import { SignIn,SignOut,SignUp } from "./components/Signin";
+import { SignIn,SignOut,SignUp } from "./components/AuthButtons";
+import "@repo/ui/styles.css"
 import Providers from "./providers";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -32,14 +34,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
-        <Bg>
-        <Appbar title="Zapp" buttons={{SignIn,SignOut,SignUp}}  isAuth={false}/>
         
+        <Bg>
+        
+        <Appbar title="Zapp" buttons={{SignIn,SignOut,SignUp}}  isAuth={false}/>
         {children}
         <ToastContainer theme="dark"/>
       
         </Bg>
+
         </Providers>
+        
         
       </body>
     </html>

@@ -1,5 +1,3 @@
-
-
 import NextAuth from "next-auth/next";
 import { NEXT_AUTH } from "../../../lib/NextAuth";
 

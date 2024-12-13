@@ -33,8 +33,9 @@ model Transactions{
   sender          User            @relation("UserTransactions",fields: [senderId],references: [userid])
   senderId        String  
   reciever        User?           @relation("RecieverTransactions",fields: [recieverId],references: [userid])
-  recieverId      String
-  status          Status
+  recieverId      String?
+  amount          Int
+  status          Status          @default(PENDING)
   type            TransactionType
   timestamp       DateTime        @default(now())
 

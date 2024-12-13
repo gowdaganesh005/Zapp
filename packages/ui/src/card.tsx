@@ -6,14 +6,16 @@ export function Card({
   
 }: {
   className?: string;
-  children:   React.ReactNode;
+  children:   any;
   
 }): JSX.Element {
+  
   return (
+    
     <>
     
       <div className={`p-4 shadow-lg rounded-2xl ${className}`}>
-        {children}
+      {children}
       </div>
       
     </>

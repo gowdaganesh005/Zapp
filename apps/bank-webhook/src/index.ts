@@ -5,36 +5,43 @@ const app=express()
 app.use(express.json())
 
 app.post("/bankWebhook",async(req:any,res:any)=>{
+    console.log(req.body)
     const paymentInformation={
         token:req.body.token,
+        transactionsId:req.body.transactionsId,
         userId: req.body.userId,
         amount: req.body.amount
     }
     
     try {
-        db.$transaction([
-        await db.wallet.update({
+         db.$transaction([
+         db.wallet.update({
             where:{
-                userId:paymentInformation.userId
+                ownerId:paymentInformation.userId
             },
             data:{
-                amount:{
+                balance:{
                     increment:paymentInformation.amount
                 }
             }
         }),
-        await db.transactions.update({
+         db.transactions.update({
             where:{
-                token:paymentInformation.token
+                transactionsId:paymentInformation.transactionsId
             },
             data:{
-                status:"Success"
+                status:"SUCCESS"
             }
         })
         ])
         res.status(200).json({message:"Captured"})
     } catch (error) {
+        console.log(error)
         res.status(500).json({message:"failed"})
         
     }
+})
+
+app.listen("5000",()=>{
+    console.log("Server running on port 5000")
 })

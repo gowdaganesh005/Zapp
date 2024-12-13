@@ -3,7 +3,8 @@ import sharedconfig from "@repo/tailwind-config"
 
 export default {
     content:[
-        "./app/**/*.tsx"
+        "./app/**/*.tsx",
+        "./components/**/*.tsx"
         
     ],
     presets:[sharedconfig],

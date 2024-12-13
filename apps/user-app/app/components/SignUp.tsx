@@ -57,10 +57,11 @@ export default  function SignUp(){
                 
             }    
         } catch (error:any) {
+            console.log(error)
             toast.error("Error While Creating User")
             return error.message
         }
-        router.push(`/`)
+        router.push(`/transactions`)
 
 
 
@@ -87,7 +88,7 @@ export default  function SignUp(){
                 </div>
                 <LabelledInput onChange={(e:any)=>handleonChange(e,"name")}  label="Name" type="text"/>
                 <LabelledInput onChange={(e:any)=>handleonChange(e,"email")}  label="Email" type="email"/>
-                <LabelledInput onChange={(e:any) => handleonChange(e, "phoneNumber")}  label="Phone Number" type="number"/>
+                <LabelledInput onChange={(e:any)=>handleonChange(e, "phoneNumber")}  label="Phone Number" type="number"/>
                 <LabelledInput onChange={(e:any)=>handleonChange(e,"password")}  label="Password" type="password"/>
                 <div className="flex justify-center">
                     <Button 

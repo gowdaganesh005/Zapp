@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@repo/db/db";
 import "body-parser"
+import bcrypt from "bcrypt"
 
 export async function POST(req:NextRequest,res:NextResponse){
     
@@ -23,6 +24,7 @@ export async function POST(req:NextRequest,res:NextResponse){
                 status:411
             })
         }
+        user.password=await bcrypt.hash(user.password,10)
         
         const createUser=await prisma.user.create({
             data:user,
