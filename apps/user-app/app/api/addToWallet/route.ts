@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const POST=async (req:NextRequest,res:NextResponse)=>{
     const session:any=await getServerSession(NEXT_AUTH)
-    console.log(session)
+   
     const sender=session.user.userid
 
     const transaction=await req.json();

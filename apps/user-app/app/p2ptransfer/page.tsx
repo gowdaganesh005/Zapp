@@ -3,7 +3,7 @@ import Transactions from "../components/transactions";
 export default function(){
     return (
         <>
-        <Transactions phoneNumber={false}/>
+        <Transactions phoneNumber={true}/>
         </>
     )
 }

@@ -6,6 +6,7 @@ import WalletBalance from "./WalletBalance";
 import { getServerSession } from "next-auth";
 import { NEXT_AUTH } from "../lib/NextAuth";
 import prisma from "@repo/db/db";
+import Sidebar from "./Sidebar";
 
 async function fetchtransactions(){
     const session=await getServerSession(NEXT_AUTH)
@@ -29,7 +30,7 @@ async function fetchBalance(){
     return (res?.balance || 0) / 100
 }
 
-export default async function(){
+export default async function({phoneNumber}:{phoneNumber:boolean}){
     
     const transactions=await fetchtransactions() 
     const balance=await fetchBalance()
@@ -37,27 +38,22 @@ export default async function(){
     return(
         <>
         <div className="grid grid-cols-10">
-            <Card className="bg-gray-200  col-span-2 h-screen ">
-                hello
-            </Card>
-            <Card className="bg-slate-200  col-span-8 ">
+            
+            <div className="bg-gray-200  col-span-2 h-screen ">
+            <Sidebar/>
+            </div>
+            
+            <div className="bg-slate-200  col-span-8 ">
             <div className=" w-full grid grid-cols-2">
                
                 <Card className="m-1">
                     <div>Transactions</div>
                     <div className="grid grid-cols-4">
-                        <div className="col-span-1 h-full">
+                        
+                        <div className="col-span-4 h-full">
                             <Card>
-                                <div>upi</div>
-                                <div>net Banking</div>
-                                <div>Card</div>
-                               
-                            </Card>
-                        </div>
-                        <div className="col-span-3 h-full">
-                            <Card>
-                                <div>Add To Wallet</div>
-                                <AddMoney/>
+                                <div>{phoneNumber?"Send Money":"Add To Wallet"}</div>
+                                <AddMoney phoneNumber={phoneNumber}/>
                             </Card>
                         </div>
                     </div>
@@ -73,7 +69,7 @@ export default async function(){
                 </div>
                 
             </div>
-            </Card>
+            </div>
 
         </div>
         </>
